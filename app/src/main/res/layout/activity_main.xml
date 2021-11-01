@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="balance"
+            type="String" />
+
+        <variable
+            name="viewModel"
+            type="net.mhand.klaytntoywook.MainViewModel"/>
+        
+        <variable
+            name="listener"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="initAddress"
+            type="String" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".MainActivity">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/textWalletAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{initAddress}"
+            android:textSize="20dp"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnBalance"
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            android:onClickListener="@{listener::onClick}"
+            android:text="지갑 잔액 조회 (KLAY)" />
+
+        <TextView
+            android:id="@+id/textBalance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="@{balance}"
+            android:textSize="20sp"
+            tools:text="0.0000000000000" />
+
+    </LinearLayout>
+
+</layout>
