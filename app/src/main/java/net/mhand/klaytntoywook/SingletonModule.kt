@@ -11,11 +11,9 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object SingletonModule {
 
-    private val baobabUrl by lazy { "https://api.baobab.klaytn.net:8651" }
-
     @Provides
     @Singleton
-    fun provideCaver() : Caver = Caver(baobabUrl)
+    fun provideCaver() : Caver = Caver(Config.baobabUrl)
 
     @Provides
     @Singleton

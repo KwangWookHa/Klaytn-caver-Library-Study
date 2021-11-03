@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
@@ -7,19 +6,27 @@
     <data>
 
         <variable
-            name="balance"
+            name="fromBalance"
+            type="String" />
+
+        <variable
+            name="toBalance"
             type="String" />
 
         <variable
             name="viewModel"
-            type="net.mhand.klaytntoywook.MainViewModel"/>
-        
+            type="net.mhand.klaytntoywook.MainViewModel" />
+
         <variable
             name="listener"
             type="android.view.View.OnClickListener" />
 
         <variable
-            name="initAddress"
+            name="fromAddress"
+            type="String" />
+
+        <variable
+            name="toAddress"
             type="String" />
 
     </data>
@@ -28,20 +35,23 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:paddingHorizontal="16dp"
         tools:context=".MainActivity">
 
         <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/textWalletAddress"
+            android:id="@+id/editFromAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{initAddress}"
-            android:textSize="20dp"/>
+            android:gravity="center"
+            android:hint="조회할 지갑주소"
+            android:text="@{fromAddress}"
+            android:textSize="14dp" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnBalance"
             android:layout_width="match_parent"
-            android:layout_marginTop="10dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:onClickListener="@{listener::onClick}"
             android:text="지갑 잔액 조회 (KLAY)" />
 
@@ -51,10 +61,38 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:gravity="center"
-            android:text="@{balance}"
+            android:text="@{fromBalance}"
+            android:textSize="20sp"
+            tools:text="0.0000000000000" />
+
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/editToAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:hint="받는 지갑 주소"
+            android:text="@{toAddress}"
+            android:textSize="14dp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSendTx"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:onClickListener="@{listener::onClick}"
+            android:text="전송" />
+
+        <TextView
+            android:id="@+id/textReceiverBalance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="@{toBalance}"
             android:textSize="20sp"
             tools:text="0.0000000000000" />
 
     </LinearLayout>
-
 </layout>

@@ -2,7 +2,6 @@ package net.mhand.klaytntoywook
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
@@ -25,15 +24,27 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
         initWalletAddress()
         initBalanceObserver()
+        initTxObserver()
     }
 
     private fun initWalletAddress() {
-        binding?.initAddress = "0x87A8557e7912AA12CEc0Dab3b92A90184e609B4c"
+        binding?.fromAddress = Config.fromAddress
+        binding?.toAddress = Config.toAddress
     }
 
     private fun initBalanceObserver() {
-        mainViewModel.balanceLiveData.observe(this) {
-            binding?.balance = it.toString()
+        mainViewModel.fromBalanceLiveData.observe(this) {
+            binding?.fromBalance = it
+        }
+        mainViewModel.toBalanceLiveData.observe(this) {
+            binding?.toBalance = it
+        }
+    }
+
+    private fun initTxObserver() {
+        mainViewModel.receiptLiveData.observe(this) {
+            mainViewModel.getFromBalance(binding?.editFromAddress?.text.toString())
+            mainViewModel.getToBalance(binding?.editToAddress?.text.toString())
         }
     }
 
@@ -41,8 +52,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         with(binding) {
             when(v) {
                 this?.btnBalance -> {
-                    this?.textWalletAddress?.let {
-                        mainViewModel.getBalance(it.text.toString())
+                    this?.editFromAddress?.let {
+                        mainViewModel.getFromBalance(it.text.toString())
+                    }
+                }
+                this?.btnSendTx -> {
+                    this?.editToAddress?.let {
+                        mainViewModel.sendTx(it.text.toString())
                     }
                 }
                 else -> {
